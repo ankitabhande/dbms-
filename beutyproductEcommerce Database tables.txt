@@ -1,0 +1,59 @@
+create table Customer
+(
+cust_id int(30) primary key auto_increment,
+cust_fname varchar(120),
+cust_lname varchar(120),
+cust_email varchar(120) ,
+cust_password varchar(250) not null,
+cust_mobile varchar(12)
+);
+
+create table Product
+(
+prod_id int(30) primary key auto_increment,
+prod_name varchar(150) not null,
+prod_category varchar(150) not null,
+prod_brand varchar(160) not null,
+prod_price int(30) not null,
+prod_stock int(30) not null
+);
+
+create table payment(
+billno int(30) primary key,
+pay_method varchar(100) not null,
+total_price int(30),
+pay_date date,
+cust_id int(20),
+foreign key(cust_id) references Customer(cust_id)
+);
+
+history
+
+create table YourOrders(
+cust_id int(30),
+billno int(30),
+prod_id int(30),
+foreign key(prod_id) references Product(prod_id),
+foreign key(billno) references payment(billno),
+foreign key(cust_id) references Customer(cust_id)
+);
+
+cart 
+create table cart(
+prod_id int(30),
+cust_id int(120),
+qty int(100),
+foreign key(prod_id) references Product(prod_id),
+foreign key(cust_id) references Customer(cust_id)
+);
+
+create table address
+(
+cust_id int(30),
+cust_addressLine varchar(250),
+cust_city varchar(250),
+cust_state varchar(250),
+cust_pincode varchar(250),
+foreign key(cust_id) references Customer(cust_id)
+);
+
